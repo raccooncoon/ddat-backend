@@ -1,6 +1,8 @@
 package com.raccoon.ddat.services;
 
 import com.raccoon.ddat.dto.XmlFileEntityDto;
+import com.raccoon.ddat.entity.XmlFileEntity;
+import com.raccoon.ddat.mapper.XmlFileMapper;
 import com.raccoon.ddat.repository.XmlFileRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,20 +18,14 @@ import java.util.List;
 public class XmlFileService {
 
     private final XmlFileRepository repository;
+    private final XmlFileMapper mapper;
 
     public Page<XmlFileEntityDto> getXmlFiles(String context, List<String> subtags, Pageable pageable) {
-        return repository.findByContextContainsAndSubtagInOrderByModuleName(context, subtags, pageable).map(entity ->
-                XmlFileEntityDto.builder()
-                        .id(entity.getId())
-                        .context(entity.getContext())
-                        .subtag(entity.getSubtag())
-                        .moduleName(entity.getModuleName())
-                        .build());
+        return repository.findByContextContainsAndSubtagInOrderByModuleName(context, subtags, pageable)
+                .map(mapper::toDto);
     }
 
-    public Page<XmlFileEntityDto> saveXmlFile(XmlFileEntityDto dto) {
-
-        return null;
-        //return repository.save(dto.toEntity());
+    public XmlFileEntityDto saveXmlFile(XmlFileEntity entity) {
+        return mapper.toDto(repository.save(entity));
     }
 }

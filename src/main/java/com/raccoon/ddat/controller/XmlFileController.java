@@ -1,6 +1,7 @@
 package com.raccoon.ddat.controller;
 
 import com.raccoon.ddat.dto.XmlFileEntityDto;
+import com.raccoon.ddat.mapper.XmlFileMapper;
 import com.raccoon.ddat.services.XmlFileService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import java.util.List;
 public class XmlFileController {
 
     final XmlFileService service;
+    final XmlFileMapper mapper;
 
     @GetMapping("/hi")
     public String sayHi() {
@@ -33,9 +35,8 @@ public class XmlFileController {
     }
 
     @PostMapping("/context/")
-    public Page<XmlFileEntityDto> postXmlFile(
-            @RequestBody XmlFileEntityDto dto
+    public XmlFileEntityDto postXmlFile(@RequestBody XmlFileEntityDto dto
     ) {
-        return service.saveXmlFile(dto);
+        return service.saveXmlFile(mapper.toEntity(dto));
     }
 }
