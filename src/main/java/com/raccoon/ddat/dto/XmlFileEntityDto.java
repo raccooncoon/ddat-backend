@@ -16,6 +16,8 @@ public record XmlFileEntityDto(
         String fileName,
         String xmlid,
         String methodModels,
+        String urlCount,
         String context
+
 ) implements Serializable {
 }

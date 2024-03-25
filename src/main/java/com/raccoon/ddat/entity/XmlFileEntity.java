@@ -31,6 +31,9 @@ public class XmlFileEntity {
     @Column
     private String xmlid;
 
+    @Column
+    private int urlCount;
+
     @Column(columnDefinition = "TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String methodModels;
 

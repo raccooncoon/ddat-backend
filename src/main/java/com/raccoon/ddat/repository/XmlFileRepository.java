@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface XmlFileRepository extends JpaRepository<XmlFileEntity, Long> {
-    Page<XmlFileEntity> findByContextContainsAndSubtagInOrderByModuleName(String context, List<String> subtags, Pageable pageable);
+    Page<XmlFileEntity> findByContextContainsAndSubtagInOrderByUrlCountDesc(String search, List<String> subtags, Pageable pageable);
+    Page<XmlFileEntity> findBySubtagInOrderByUrlCountDesc(List<String> subtags, Pageable pageable);
 }

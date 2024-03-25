@@ -25,18 +25,17 @@ public class XmlFileController {
         return "hi";
     }
 
-    @GetMapping("context/{context}")
+    @GetMapping("context/")
     public Page<XmlFileEntityDto> getXmlFiles(
-            @PathVariable String context,
             @RequestParam List<String> subtags,
+            @RequestParam String search,
             @PageableDefault Pageable pageable
     ) {
-        return service.getXmlFiles(context, subtags, pageable);
+        return service.getXmlFiles(search, subtags, pageable);
     }
 
-    @PostMapping("/context/")
-    public XmlFileEntityDto postXmlFile(@RequestBody XmlFileEntityDto dto
-    ) {
+    @PostMapping("/contexts/")
+    public XmlFileEntityDto postXmlFile(@RequestBody XmlFileEntityDto dto) {
         return service.saveXmlFile(mapper.toEntity(dto));
     }
 }

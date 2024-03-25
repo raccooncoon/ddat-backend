@@ -20,8 +20,19 @@ public class XmlFileService {
     private final XmlFileRepository repository;
     private final XmlFileMapper mapper;
 
-    public Page<XmlFileEntityDto> getXmlFiles(String context, List<String> subtags, Pageable pageable) {
-        return repository.findByContextContainsAndSubtagInOrderByModuleName(context, subtags, pageable)
+    public Page<XmlFileEntityDto> getXmlFiles(String search, List<String> subtags, Pageable pageable) {
+        return search.isEmpty() ?
+                findBySubtags(subtags, pageable) :
+                findBySearchAndSubtags(search, subtags, pageable);
+    }
+
+    private Page<XmlFileEntityDto> findBySubtags(List<String> subtags, Pageable pageable) {
+        return repository.findBySubtagInOrderByUrlCountDesc(subtags, pageable)
+                .map(mapper::toDto);
+    }
+
+    private Page<XmlFileEntityDto> findBySearchAndSubtags(String search, List<String> subtags, Pageable pageable) {
+        return repository.findByContextContainsAndSubtagInOrderByUrlCountDesc(search, subtags, pageable)
                 .map(mapper::toDto);
     }
 
