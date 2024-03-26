@@ -14,7 +14,8 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(false);
-        config.addAllowedOrigin("*"); // 허용할 origin 설정
+        config.addAllowedOrigin("https://main.duw0jlyeruvni.amplifyapp.com"); // 허용할 origin 설정
+        config.addAllowedOrigin("http://localhost:5173"); // 허용할 origin 설정
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
