@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -32,6 +33,12 @@ public class XmlFileController {
             @PageableDefault Pageable pageable
     ) {
         return service.getXmlFiles(search, subtags, pageable);
+    }
+
+    @GetMapping("total_context/")
+    public Map<String, Long> getTotalXmlFiles(
+    ) {
+        return service.getAllXmlFiles();
     }
 
     @PostMapping("/contexts/")

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -38,5 +40,11 @@ public class XmlFileService {
 
     public XmlFileEntityDto saveXmlFile(XmlFileEntity entity) {
         return mapper.toDto(repository.save(entity));
+    }
+
+    public Map<String, Long> getAllXmlFiles() {
+        return  repository.findAll().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.groupingBy(XmlFileEntityDto::moduleName, Collectors.counting()));
     }
 }

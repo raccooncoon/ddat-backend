@@ -10,4 +10,5 @@ import java.util.List;
 public interface XmlFileRepository extends JpaRepository<XmlFileEntity, Long> {
     Page<XmlFileEntity> findByContextContainsAndSubtagInOrderByUrlCountDesc(String search, List<String> subtags, Pageable pageable);
     Page<XmlFileEntity> findBySubtagInOrderByUrlCountDesc(List<String> subtags, Pageable pageable);
+    List<XmlFileEntity> findAll();
 }
