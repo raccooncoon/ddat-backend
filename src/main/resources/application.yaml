@@ -6,3 +6,9 @@ spring:
     show-sql : true
     hibernate:
       ddl-auto: update
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: ap-northeast-2

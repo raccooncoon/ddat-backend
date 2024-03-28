@@ -2,6 +2,7 @@ package com.raccoon.ddat.controller;
 
 import com.raccoon.ddat.dto.XmlFileEntityDto;
 import com.raccoon.ddat.mapper.XmlFileMapper;
+import com.raccoon.ddat.services.LambdaService;
 import com.raccoon.ddat.services.XmlFileService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ public class XmlFileController {
 
     final XmlFileService service;
     final XmlFileMapper mapper;
+    final LambdaService lambdaService;
 
     @GetMapping("/hi")
     public String sayHi() {
@@ -49,5 +51,10 @@ public class XmlFileController {
     @DeleteMapping("/contexts/{moduleName}")
     public void deleteXmlFile(@PathVariable String moduleName) {
         service.deleteByModuleName(moduleName);
+    }
+
+    @GetMapping("/aws/lambdas/status")
+    public String getAwsLambdaStatus() {
+        return lambdaService.getLambdaStatus();
     }
 }
