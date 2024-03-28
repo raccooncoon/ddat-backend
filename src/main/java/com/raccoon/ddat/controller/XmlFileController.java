@@ -45,4 +45,9 @@ public class XmlFileController {
     public XmlFileEntityDto postXmlFile(@RequestBody XmlFileEntityDto dto) {
         return service.saveXmlFile(mapper.toEntity(dto));
     }
+
+    @DeleteMapping("/contexts/{moduleName}")
+    public void deleteXmlFile(@PathVariable String moduleName) {
+        service.deleteByModuleName(moduleName);
+    }
 }
