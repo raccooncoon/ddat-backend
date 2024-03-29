@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -43,8 +44,17 @@ public class XmlFileService {
     }
 
     public Map<String, Long> getAllXmlFiles() {
-        return  repository.findAll().stream()
-                .map(mapper::toDto)
-                .collect(Collectors.groupingBy(XmlFileEntityDto::moduleName, Collectors.counting()));
+        return repository.countByModuleName().stream()
+                .filter(object -> object[0] != null)
+                .collect(Collectors.toMap(
+                        object -> (String) object[0],
+                        object -> (Long) object[1]
+                ));
     }
+
+    @Transactional
+    public void deleteByModuleName(String moduleName) {
+        repository.deleteByModuleName(moduleName);
+    }
+
 }
