@@ -14,10 +14,7 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(false);
-        config.addAllowedOrigin("http://43.201.90.176:58080"); // 허용할 origin 설정
-        config.addAllowedOrigin("http://43.201.90.176:50080"); // 허용할 origin 설정
-        config.addAllowedOrigin("http://localhost:8080"); // 허용할 origin 설정
-        config.addAllowedOrigin("http://localhost:5173"); // 허용할 origin 설정
+        config.addAllowedOrigin("*"); // 허용할 origin 설정
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
